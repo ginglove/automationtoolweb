@@ -1,0 +1,1264 @@
+/* ======================= */
+/* Modern SpikeNow-Inspired Styling */
+/* ======================= */
+
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+/* Root Colors */
+:root {
+    --primary-color: #1A1D3A;
+    --secondary-color: #F5F7FA;
+    --accent-color: #FF6A3D;
+    --text-color: #333;
+    --footer-bg: #10122D;
+    --footer-text: #cccccc;
+    --link-hover: #FF9475;
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Ensure the header is fully responsive */
+header {
+    background-color: #1A1D29;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    flex-wrap: wrap;
+}
+
+/* Logo */
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+
+/* ======================= */
+/* Navigation Bar */
+/* ======================= */
+
+/* Navigation container */
+/* Align Navigation Items */
+#nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+/* Navigation menu */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Ensure all nav items are vertically aligned */
+nav ul li {
+    display: flex;
+    align-items: center;
+    position: relative; /* Ensures dropdown aligns properly */
+}
+
+/* Navigation Links */
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 12px 15px; /* Ensures clickable area is large */
+    display: flex;
+    align-items: center; /* Align text with other elements */
+    height: 40px; /* Same height as Account button */
+}
+
+nav ul li a:hover {
+    color: #FFA500; /* Orange hover */
+}
+
+/* Account Button */
+/* Account Button */
+#account-btn {
+    background-color: #CC5A1E;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+    text-decoration: none;
+    min-width: 140px;
+    height: 40px;
+    cursor: pointer;
+    position: relative;
+    z-index: 101; /* Ensure button is always clickable */
+}
+
+#account-btn:hover {
+    background-color: #E65C00;
+}
+
+
+
+/* Ensure the dropdown container wraps both the button and menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Menu */
+.dropdown ul {
+    position: absolute;
+    top: 45px; /* Aligns correctly below Account button */
+    right: 0;
+    background: white;
+    color: black;
+    list-style: none;
+    padding: 10px;
+    display: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 180px;
+}
+
+/* Ensure dropdown stays open when hovering over both the button and menu */
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Dropdown Links */
+.dropdown ul li {
+    display: block;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 45px; /* Ensures no gap between button and menu */
+    right: 0;
+    background: white;
+    color: black;
+    list-style: none;
+    padding: 10px;
+    display: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 200px;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+
+/* Show dropdown when JavaScript adds this class */
+.show-dropdown {
+    display: block !important;
+}
+
+.dropdown ul li a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+/* Keep dropdown open when hovering over it */
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+    display: block;
+}
+
+/* Dropdown Links */
+.dropdown-menu li {
+    display: block;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+/* Improve Hover Effect */
+.dropdown-menu li a:hover {
+    background-color: #F4F4F4;
+}
+
+
+/* ======================= */
+/* Main Content (Login & Register) */
+/* ======================= */
+.container {
+    width: 90%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: white;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+
+/* Iframe Pop-up Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Iframe inside modal */
+#login-iframe {
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+}
+
+
+/* Success Pop-up */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    text-align: center;
+    z-index: 1001;
+    width: 80%;
+    max-width: 300px;
+}
+/* Error Pop-up */
+.error-popup {
+    background-color: #FF4C4C;
+    color: white;
+}
+
+/* Headings */
+h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+
+/* Input Group for better alignment */
+.input-group {
+    margin-bottom: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Input Fields */
+input {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Highlight fields with errors */
+.input-error {
+    border: 1px solid #FF4C4C !important;
+    background-color: #FFF1F1;
+}
+
+/* Error Message Styling */
+.error-message {
+    color: #FF4C4C;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: var(--link-hover);
+}
+
+/* General Section Spacing */
+section {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
+    background: #ffffff;
+}
+
+/* Ensure No Excessive Margins */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Remove Extra Gaps Between Sections */
+section + section {
+    margin-top: 20px;
+}
+
+/* Course Page Layout */
+.home-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Sidebar: Course Categories */
+.course-categories {
+    width: 250px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    position: sticky;
+    top: 80px;
+}
+
+.course-categories h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #E67E22;
+    padding-bottom: 5px;
+}
+
+.course-categories ul {
+    list-style: none;
+    padding: 0;
+}
+
+.course-categories li {
+    margin: 12px 0;
+}
+
+.course-categories a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    display: block;
+    padding: 10px;
+    border-radius: 6px;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.course-categories a:hover {
+    background: #E67E22;
+    color: white;
+}
+
+/* Course List */
+.course-list {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+
+
+/* Course List Layout */
+/* .course-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    align-items: stretch;
+} */
+
+
+/* Course Card */
+/* .course-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+} */
+
+/* Course Card */
+.course-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* .course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+} */
+
+/* Course Image */
+.course-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Ensure images fit correctly */
+    border-radius: 8px;
+    background-color: #F8F8F8; /* Light background for consistency */
+}
+
+/* Course Details */
+.course-details {
+    flex: 1; /* Allow content to expand and align evenly */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+/* Course Title */
+.course-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #222; /* Darker for readability */
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+
+/* Ensure Button Alignment */
+.course-footer {
+    margin-top: auto; /* Push button to the bottom */
+}
+
+
+/* Course Description */
+.course-description {
+    font-size: 14px;
+    color: #666;
+    margin: 8px 0;
+    text-align: center;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+
+
+/* Course Price */
+.course-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #E67E22;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+/* Active Category Styling */
+.active-category {
+    background: #E67E22;
+    color: white !important;
+    font-weight: bold;
+}
+
+
+
+
+/* Pop-up Message */
+.popup-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    border-radius: 6px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1000;
+}
+
+/* Success Message */
+.popup-message.success {
+    background-color: #28a745; /* Green */
+}
+
+/* Error Message */
+.popup-message.error {
+    background-color: #dc3545; /* Red */
+}
+
+/* Fade-Out Effect */
+.popup-message.fade-out {
+    opacity: 0;
+}
+
+
+/* 📌 Pop-Up Overlay (Dark Background) */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* 📌 Pop-Up Container */
+.popup-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 350px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 📌 Pop-Up Heading */
+.popup-container h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #28a745;
+}
+
+/* 📌 Countdown Message */
+.popup-container p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+
+
+/* Add to Cart Button */
+.add-to-cart {
+    background-color: #E67E22;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s ease-in-out;
+}
+
+
+/* Cart Icon in Header */
+.cart-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+
+.add-to-cart:hover {
+    background-color: #D35400;
+}
+
+#cart-btn img {
+    width: 28px;
+    height: 28px;
+}
+#cart-icon {
+    width: 30px;
+    height: 30px;
+}
+
+/* Cart Badge (Red Circle) */
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 3px 6px;
+    display: none; /* ✅ Initially hidden when cart is empty */
+}
+
+/* Shopping Cart Modal */
+.cart-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Cart Content Box */
+.cart-content {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Shopping Cart Total */
+.cart-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #E67E22;
+}
+
+
+/* Close Button */
+.close-cart {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Shopping Cart Title */
+.cart-content h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1A1D29;
+    margin-bottom: 15px;
+}
+
+/* Cart Item Container */
+.cart-item-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Cart Item Layout */
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Cart Item Image */
+.cart-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Cart Item Text */
+.cart-item p {
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+}
+
+
+
+/* Total Price */
+#cart-total {
+    font-size: 18px;
+    font-weight: bold;
+    color: #E67E22;
+    margin: 15px 0;
+}
+
+/* Checkout Button */
+#checkout-btn {
+    background-color: #E67E22;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s ease-in-out;
+}
+
+#checkout-btn:hover {
+    background-color: #D35400;
+}
+
+
+
+/* Remove Button (Full Width) */
+.remove-item {
+    background-color: #E67E22;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 30%; /* Matches the width of course text */
+    transition: background 0.2s ease-in-out;
+}
+
+.remove-item:hover {
+    background-color: #D35400;
+}
+
+button {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Profile Section */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-section img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* User Info */
+.user-info p {
+    font-size: 16px;
+    margin: 8px 0;
+    color: var(--text-color);
+}
+
+/* Logout Button */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.3s ease-in-out;
+    margin-top: 20px;
+}
+
+
+/* 📌 OK Button */
+#logout-close-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#logout-close-btn:hover {
+    background-color: #218838;
+}
+
+
+button:hover {
+    background-color: var(--link-hover);
+}
+
+/* 📌 Order History Section */
+#order-history-section {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.order-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+/* 📌 Order Card */
+.order-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-left: 6px solid #FF6600;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+/* 📌 Order Header */
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* ✅ Ensure alignment */
+    font-weight: bold;
+    font-size: 16px;
+    color: #444;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 10px;
+}
+
+
+
+/* 📌 Order Items - Change to Vertical List */
+.order-items {
+    display: flex;
+    flex-direction: column; /* ✅ Items will now stack vertically */
+    gap: 15px;
+    padding: 15px;
+}
+
+
+/* 📌 Order Item */
+.order-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* ✅ Image on the left, text on the right */
+    background: #F9F9F9;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+
+/* 📌 Order Image */
+.order-image {
+    width: 200px; /* ✅ Set width */
+    height: auto;
+    max-height: 100px; /* ✅ Prevent large images */
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+
+/* 📌 Order Details - Align to Right */
+.order-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end; /* ✅ Align text to the right */
+    text-align: right; /* ✅ Ensure text is right-aligned */
+    flex-grow: 1;
+}
+
+
+/* 📌 Order Title */
+.order-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 📌 Order Price */
+.order-price {
+    color: #FF6600;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* 📌 No Orders Message */
+.no-orders {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+    padding: 20px;
+}
+
+
+
+
+
+/* ======================= */
+/* Footer (Updated to Match SpikeNow) */
+/* ======================= */
+footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 40px 0;
+    font-size: 14px;
+    width: 100%;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+/* Footer Column Styling */
+.footer-column {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-column h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: white;
+    text-transform: uppercase;
+}
+
+.footer-column p,
+.footer-column a {
+    font-size: 14px;
+    color: #b3b3b3;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-column a:hover {
+    color: var(--accent-color);
+}
+
+/* Footer Social Media Container */
+.footer-social {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #b3b3b3;
+}
+
+/* Social Media Icons */
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    border-radius: 50%;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+}
+
+/* Facebook */
+.social-icon.facebook {
+    background-color: #1877F2;
+}
+
+.social-icon.facebook:hover {
+    background-color: #145dbb;
+    transform: translateY(-3px);
+    box-shadow: 0px 5px 12px rgba(24, 119, 242, 0.5);
+}
+
+
+/* Website */
+.social-icon.website {
+    background-color: #3498db;
+}
+
+.social-icon.website:hover {
+    background-color: #1d6fa5;
+    transform: translateY(-3px);
+    box-shadow: 0px 5px 12px rgba(52, 152, 219, 0.5);
+}
+
+/* Tiktok */
+.social-icon.tiktok {
+    background-color: #000;
+}
+
+.social-icon.tiktok:hover {
+    background-color: #333;
+    transform: translateY(-3px);
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.5);
+}
+
+
+
+/* Social Media Icons */
+.social-icon i {
+    font-size: 22px;
+}
+
+/* Tooltip on Hover */
+.social-icon::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -30px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 12px;
+    padding: 5px 8px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.social-icon:hover::after {
+    opacity: 1;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-social {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-column {
+        margin-bottom: 25px;
+    }
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    /* Center the menu */
+    .dropdown {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Full width dropdown button */
+    #account-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .course-card {
+        max-width: 100%;
+    }
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cart-content {
+        width: 95%;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #nav-menu {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .cart-container {
+        margin-left: auto;
+    }
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .home-container {
+        flex-direction: column;
+    }
+
+    .course-categories {
+        width: 100%;
+        position: relative;
+    }
+
+    .course-list {
+        justify-content: center;
+    }
+}
+
+/* 📌 Responsive Fixes */
+@media screen and (max-width: 768px) {
+    .order-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .order-items {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .order-item {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .order-image {
+        width: 100px;
+        max-height: 80px;
+        margin-bottom: 10px;
+    }
+    .order-details {
+        align-items: flex-end; /* ✅ Keep text aligned right */
+        text-align: right;
+    }
+    .order-price {
+        text-align: right;
+        margin-top: 5px;
+    }
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Register</h2>
+        <form id="registerForm">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="registerUsername" name="username" placeholder="Enter Username">
+                <span class="error-message" id="username-error"></span>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="registerEmail" name="email" placeholder="Enter Email">
+                <span class="error-message" id="email-error"></span>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="registerPassword" name="password" placeholder="Enter Password">
+                <span class="error-message" id="password-error"></span>
+            </div>
+
+            <div class="input-group">
+                <label for="re-password">Re-enter Password</label>
+                <input type="password" id="re-password" name="re-password" placeholder="Re-enter Password">
+                <span class="error-message" id="re-password-error"></span>
+            </div>
+
+            <div class="input-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" placeholder="Enter Address">
+                <span class="error-message" id="address-error"></span>
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="/login">Login here</a></p>
+        <p id="registerMessage"></p>
+    </div>
+    <!-- Success Pop-up -->
+    <div id="success-popup" class="popup">
+        <p>✅ Register successful! Redirecting to Homepage in <span id="countdown">3</span> seconds...</p>
+    </div>        
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const successPopup = document.getElementById("success-popup");
+            const email = document.getElementById("registerEmail").value;
+            const username = document.getElementById("registerUsername").value;
+            const password = document.getElementById("registerPassword").value;
+            const countdownText = document.getElementById("countdown");
+
+            const registerForm = document.getElementById("register-form");
+            const usernameInput = document.getElementById("registerUsername");
+            const emailInput = document.getElementById("registerEmail");
+            const passwordInput = document.getElementById("registerPassword");
+            const rePasswordInput = document.getElementById("re-password");
+            const addressInput = document.getElementById("address");
+
+            const usernameError = document.getElementById("username-error");
+            const emailError = document.getElementById("email-error");
+            const passwordError = document.getElementById("password-error");
+            const rePasswordError = document.getElementById("re-password-error");
+            const addressError = document.getElementById("address-error");            
+
+            // Client-side validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const usernameRegex = /^[a-zA-Z0-9]{3,15}$/;
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
+
+            const rePassword = rePasswordInput.value.trim();
+            const address = addressInput.value.trim();
+
+            usernameError.textContent = "";
+            emailError.textContent = "";
+            passwordError.textContent = "";
+            rePasswordError.textContent = "";
+            addressError.textContent = "";        
+            let valid = true;
+            
+                    // Validate Username
+            if (username === "") {
+                usernameError.textContent = "Username is required.";
+                valid = false;
+            }
+            // Validate Email
+            if (email === "") {
+                emailError.textContent = "Valid email is required.";
+                valid = false;
+            }            
+
+            if (!emailRegex.test(email)) {
+                emailError.textContent = "Invalid email format!";
+                valid = false;
+                return;
+            }
+            if (!usernameRegex.test(username)) {
+                usernameError.textContent = "Username must be 3-15 alphanumeric characters!";
+                valid = false;
+                return;
+            }
+            if (!passwordRegex.test(password)) {
+                passwordError.textContent = "Password must have at least 6 characters, 1 uppercase, and 1 digit!";
+                valid = false;
+                return;
+            }
+            // Validate Re-enter Password
+            if (rePassword !== password) {
+                rePasswordError.textContent = "Passwords do not match.";
+                valid = false;
+            }
+
+            // Validate Address
+            if (address === "") {
+                addressError.textContent = "Address is required.";
+                valid = false;
+            }
+            if (!valid) return; // Stop submission if validation failed
+            try{
+                    const response = await fetch("/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username, email, password, address })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    setTimeout(() => {
+                        successPopup.style.display = "block"; // Show success pop-up
+                        let countdown = 3;
+
+                        const interval = setInterval(() => {
+                            countdown--;
+                            countdownText.textContent = countdown;
+
+                            if (countdown === 0) {
+                                clearInterval(interval);
+                                window.parent.location.href = "/"; // Redirect parent page to index.html
+                            }
+                        }, 1000);
+                    }, 500);                
+                }
+                else {
+                    // Display error messages from API response
+                    if (data.message.includes("Username")) {
+                        usernameError.textContent = data.message;
+                    } else if (data.message.includes("Email")) {
+                        emailError.textContent = data.message;
+                    } else if (data.message.includes("Password")) {
+                        passwordError.textContent = data.message;
+                    } else if (data.message.includes("Address")) {
+                        addressError.textContent = data.message;
+                    } else {
+                        usernameError.textContent = data.message; // General error
+                    }
+                }
+            }catch(error){
+                console.error("Error during registration:", error);
+                usernameError.textContent = "An error occurred. Please try again.";
+            }
+
+        });
+    </script>
+</body>
+</html>

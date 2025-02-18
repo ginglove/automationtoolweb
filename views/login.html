@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="text" id="loginUsername" name="username" placeholder="Username">
+                <span class="error-message" id="username-error"></span> <!-- Error message -->
+            </div>
+            <div class="input-group">
+                <input type="password" id="loginPassword" name="password" placeholder="Password">
+                <span class="error-message" id="password-error"></span> <!-- Error message -->
+            </div>            
+
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="register">Register here</a></p>
+    </div>
+    <!-- Success Pop-up -->
+    <div id="success-popup" class="popup">
+        <p>✅ Login successful! Redirecting in <span id="countdown">3</span> seconds...</p>
+    </div>            
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const loginForm = document.getElementById("login-form");
+            const username = document.getElementById("loginUsername").value;
+            const password = document.getElementById("loginPassword").value;
+            const usernameInput = document.getElementById("loginUsername");
+            const passwordInput = document.getElementById("loginPassword");            
+            const usernameError = document.getElementById("username-error");
+            const passwordError = document.getElementById("password-error");
+            const successPopup = document.getElementById("success-popup");
+            const countdownText = document.getElementById("countdown");
+
+
+            // Reset previous errors
+            usernameError.textContent = "";
+            passwordError.textContent = "";            
+            usernameInput.classList.remove("input-error");
+            passwordInput.classList.remove("input-error");
+
+
+            let valid = true;
+
+            // Validate Username
+            if (username === "") {
+                usernameError.textContent = "Username is required.";
+                usernameInput.classList.add("input-error");
+                valid = false;
+            }
+
+            // Validate Password
+            if (password === "") {
+                passwordError.textContent = "Password is required.";
+                passwordInput.classList.add("input-error");
+                valid = false;
+            }            
+            if (!valid) return; // Stop submission if validation failed
+
+            const response = await fetch("/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                // Simulate login success (In real app, verify credentials via API)
+                setTimeout(() => {
+                    successPopup.style.display = "block"; // Show success pop-up
+                    let countdown = 3;
+
+                    const interval = setInterval(() => {
+                        countdown--;
+                        countdownText.textContent = countdown;
+
+                        if (countdown === 0) {
+                            clearInterval(interval);
+                            window.parent.location.href = "/"; // Redirect parent page to index.html
+                        }
+                    }, 1000);
+                }, 500);
+            }
+            else {
+                // Show error messages based on API response
+                if (data.message === "User not found!") {
+                    usernameError.textContent = data.message;
+                    usernameInput.classList.add("input-error");
+                }
+                if (data.message === "Invalid credentials!") {
+                    passwordError.textContent = data.message;
+                    passwordInput.classList.add("input-error");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
